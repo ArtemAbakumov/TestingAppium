@@ -1,0 +1,16 @@
+{
+  "testsGlob": "./tests/*.js",
+  "appiumHost": "0.0.0.0",
+  "appiumPort": "4723",
+  "ios": {
+    "appPath": "./app/mobilkassan-dev-debug.app",
+    "noReset": true,
+    "platformVersion": "10.0",
+    "deviceName": "iPhone SE"
+  },
+  "android": {
+    "appPath": "./app/mobilkassan-dev-debug.apk",
+    "deviceName": "emulator-5554",
+    "platformVersion": "7.1"
+  }
+}
