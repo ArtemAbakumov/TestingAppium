@@ -58,7 +58,7 @@ test('Welcome screen', async (t) => { // Название теста 'Welcome sc
   await driver.element(WelcomeScreen.continueBtn).click()
   await driver.waitForVisible(WelcomeScreen.setOrientationTitle, 60000)
   await driver.element(WelcomeScreen.continueBtn).click()
-  await driver.touchAction({action:'tap',x:103,y:200})
+  await driver.touchAction({action:'tap',x:103,y:200})// нажатие по конкретным координатам
 })
 ```
 
