@@ -54,6 +54,8 @@ test('Welcome screen', async (t) => { // Название теста 'Welcome sc
   await driver.waitForVisible(WelcomeScreen.setupWizard, 60000) // перед каждой коммандой driver добавлять await
   const alertTitle = await driver.element(WelcomeScreen.setupWizard).getText() // результат выполнения комманды можно сохранить в переменную
   t.equal(alertTitle, 'Setup wizard', 'Alert title is correct') // и протестировать
+  const alertText = await driver.element(WelcomeScreen.welcomeMessage).getText()
+  t.equal(alertText, 'Welcome! This guide will help you get started with the app.', 'Alert text is correct')//проверка текста в поле
   driver.scrollTo// скролл экрана
   await driver.element(WelcomeScreen.continueBtn).click()
   await driver.waitForVisible(WelcomeScreen.setOrientationTitle, 60000)
