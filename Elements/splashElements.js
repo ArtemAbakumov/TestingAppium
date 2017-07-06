@@ -15,6 +15,8 @@ export const WelcomeScreen = {
   landscapeBtn: idFromAccessId('android:id/button2'),
   splashScrn: idFromResourceId('se.mobilkassan:id/splash'),
   home: idFromResourceId('se.mobilkassan:id/home_buttom'),
+  importdata: idFromResourceId('settings_wizard_backup_importing'),
+  readyToast: idFromResourceId('se.mobilkassan:id/settings_wizard_ready'),
  
    helpMenu: {
     about: idFromText('About'),

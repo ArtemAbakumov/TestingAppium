@@ -14,6 +14,7 @@ const alertText = await driver.element(WelcomeScreen.welcomeMessage).getText()
 await driver.element(WelcomeScreen.continueBtn).click()
 await driver.waitForVisible(WelcomeScreen.setupWizard,60000)
 await driver.element(WelcomeScreen.portraitBtn).click()
-await driver.touchAction({action:'tap', x:103, y:200}),
+await driver.waitForVisible(WelcomeScreen.importdata,60000)
+
 await driver.closeApp()
 })
