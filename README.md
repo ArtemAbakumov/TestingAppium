@@ -5,27 +5,27 @@
 
 
 ## Договоренности
-- стартовая точка — главный экран 
-- тестовый набор атомарен 
-- он должен сам о себе позаботиться 
-- не использовать метод .pause() 
-- использовать повсеместно .waitForVisible() 
+- стартовая точка — главный экран
+- тестовый набор атомарен
+- он должен сам о себе позаботиться
+- не использовать метод .pause()
+- использовать повсеместно .waitForVisible()
 
-## Flow 
-Для взаимодействия с приложением  использутеся [webdriver.io](http://webdriver.io/api.html), 
-например его методы element, click, waitForVisible. 
+## Flow
+Для взаимодействия с приложением  использутеся [webdriver.io](http://webdriver.io/api.html),
+например его методы element, click, waitForVisible.
 
 Для тестирования используется фреймворк [tape](https://github.com/substack/tape#methods).
 
 ### Настройка
-В файле .appiumhelperrc 
+В файле .appiumhelperrc
 
 ```json
 {
   "android": {
     "appPath": "./app/mobilkassan-dev-debug.apk", // файл с приложением
     "deviceName": "emulator-5554", // название устройства
-    "platformVersion": "7.1" // версия android
+    "platformVersion": "6.0" // версия android
   }
 }
 ```
@@ -34,33 +34,43 @@
 Экран приложения описывается в файле elements.js
 
 ``` js
-export const WelcomeScreen = {
-  title: idFromResourceId('android:id/action_bar_title'), // idFromAccessId - создает селектор по "resource id"
-  licenceBtn: idFromAccessId('License'), // idFromAccessId - создает селектор по "content desc"
-  continueBtn: idFromText('Continue'), // idFromText - создает селектор по "text"
-  
-  helpMenu: {  // можно создавать группы селекторов 
-    about: idFromText('About'),
-    help: idFromText('Help'),
-    reportError: idFromText('Report Error'),
-    exportEJournal: idFromText('Export E-journal')
+  // могут быть как селекторы
+  corporateIDInput: idFromResourceId(appId + 'EditSeller_organizationNumber'),
+  merchantNameInput: idFromResourceId(appId + 'EditSeller_name'),
+  addressInput: idFromResourceId(appId + 'et_device_location_address'),
+
+  // так и методы, которые реализуют некоторую функциональность
+  setComment: comment => {
+    return commands.setInputValue(ActivationScreen.commentInput, comment)
   }
-}
 ```
+
+### Команды
+- ```findAndClick(selector)```- ищет элемент на экране, если не найден то скролит вниз (до 10 раз) и кликает по элементу если найдет
+- ```findInList(selector)``` - ищет элемент на экране, если не найден то скролит вниз (до 10 раз)
+- ```setInputValue(selector, value)``` - находит элемент и пишет текст в поле ввода
+- ```waitForNotExist(selector)``` - ожидает что элемента нет на скрине
+- ```waitAndClick(selector)``` - ждет появления элемента и кликает по нему
+- ```pressBackBtton()``` - отправляет команду "назад"
+- ```pressTabBtton()``` - отправляет команду "tab"
+- ```scrollDown()``` - скролит вниз
+- ```scrollUp()``` - скролит вверх
 
 ### Тест
 ```js
-test('Welcome screen', async (t) => { // Название теста 'Welcome screen'
-  await driver.waitForVisible(WelcomeScreen.setupWizard, 60000) // перед каждой коммандой driver добавлять await
-  const alertTitle = await driver.element(WelcomeScreen.setupWizard).getText() // результат выполнения комманды можно сохранить в переменную
-  t.equal(alertTitle, 'Setup wizard', 'Alert title is correct') // и протестировать
-  const alertText = await driver.element(WelcomeScreen.welcomeMessage).getText()
-  t.equal(alertText, 'Welcome! This guide will help you get started with the app.', 'Alert text is correct')//проверка текста в поле
-  driver.scrollTo// скролл экрана
-  await driver.element(WelcomeScreen.continueBtn).click()
-  await driver.waitForVisible(WelcomeScreen.setOrientationTitle, 60000)
-  await driver.element(WelcomeScreen.continueBtn).click()
-  await driver.touchAction({action:'tap',x:103,y:200})// нажатие по конкретным координатам
+test.onFinish(async () => {
+  await driver.closeApp()
+})
+
+test('Activation screen', async t => {
+  await WelcomeScreen.goThrough() // запускает приложение и проходит страницу с визардом
+  await SalesScreen.acceptActivationRequest() // нажимаем yes на диалоге запроса активации
+  await ActivationScreen.requestActivation(activation) // заполняем активацию
+  await driver.waitForVisible(
+    ActivationScreen.activationSentDialogTitleFailed,
+    10 * 1000
+  ) // перед завержением теста, всегда добавлять какую-нибудь проверку
+  t.pass('works correctly') // завершаем тест
 })
 ```
 
@@ -68,11 +78,4 @@ test('Welcome screen', async (t) => { // Название теста 'Welcome sc
 - Перед запустом тестов нужно запустить эмулятор android и сервер appium.
 - Сервер appium можно запустить коммандой в папке с проектом ```npm run appium```
 - После старта сервера в соседнем терминале можно запустить все тесты коммандой ```npm run test```
-- Либо запустить конкретный тест ```npm run test -- --glob ./tests/01_welcome.js```
-
-### Playground
-Для проверки селекторов можно запустить Playground режим: 
-```npm run playground```
-например ```js
-await driver.element(helper.idFromResourceId('android:id/button3'))
-````# ArtemAbakumov
+- Либо запустить конкретный тест ```node_modules/.bin/appium-helper --platform android --glob ./tests/02_activation.js```
