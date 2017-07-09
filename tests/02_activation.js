@@ -35,3 +35,12 @@ test('Activation screen', async t => {
   )
   t.pass('works correctly')
 })
+
+test('Activation screen', async t =>{
+await WelcomeScreen.goThrough()
+  await SalesScreen.acceptActivationRequest(Yes)
+  await findInList(ActivationScreen.submitButton)
+
+    return driver.click(ActivationScreen.submitButton)
+await driver.scrollUp()
+})
