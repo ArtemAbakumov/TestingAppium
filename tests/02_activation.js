@@ -25,7 +25,7 @@ test.onFinish(async () => {
   await driver.closeApp()
 })
 
-/*test('Activation screen', async t => {
+test('Activation screen', async t => {
   await WelcomeScreen.goThrough()
   await SalesScreen.acceptActivationRequest()
   await ActivationScreen.requestActivation(activation)
@@ -34,7 +34,7 @@ test.onFinish(async () => {
     10 * 1000
   )
   t.pass('works correctly')
-})*/
+})
 
 test('Activation screen', async t => {
   await WelcomeScreen.goThrough()
