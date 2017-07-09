@@ -48,4 +48,6 @@ test('Activation screen', async t => {
     'Please enter a Company name, at least 3 characters ',
     'Alert title is correct'
   )
+  await commands.waitForVisible(ActivationScreen.addressInput)
+  t.pass('work correctly')
 })
