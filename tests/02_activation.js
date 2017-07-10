@@ -36,13 +36,18 @@ test('Activation screen: success', async t => {
   t.pass('works correctly')
 })
 
-test('Activation screen: merchant naame validation', async t => {
+test('Activation screen', async t => {
   await WelcomeScreen.goThrough()
   await SalesScreen.acceptActivationRequest()
-  await ActivationScreen.setMerchantName('A long merchant name with 20 symbols')
-  await driver.waitForVisible(
-    ActivationScreen.activationSentDialogTitleFailed,
-    10 * 1000
+  await commands.findAndClick(ActivationScreen.submitButton)
+  const alertTitle = await driver
+    .element(ActivationScreen.merchantNameInput)
+    .getText()
+  t.equal(
+    alertTitle,
+    'Please enter a Company name, at least 3 characters ',
+    'Alert title is correct'
   )
-  t.pass('works correctly')
+  await commands.waitForVisible(ActivationScreen.addressInput)
+  t.pass('work correctly')
 })
