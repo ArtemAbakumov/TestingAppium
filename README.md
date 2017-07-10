@@ -79,3 +79,4 @@ test('Activation screen', async t => {
 - Сервер appium можно запустить коммандой в папке с проектом ```npm run appium```
 - После старта сервера в соседнем терминале можно запустить все тесты коммандой ```npm run test```
 - Либо запустить конкретный тест ```node_modules/.bin/appium-helper --platform android --glob ./tests/02_activation.js```
+- добавить переменные в playground '''.editor'''
