@@ -30,24 +30,33 @@ test('Activation screen: success', async t => {
   await SalesScreen.acceptActivationRequest()
   await ActivationScreen.requestActivation(activation)
   await driver.waitForVisible(
-    ActivationScreen.activationSentDialogTitleFailed,
+    ActivationScreen.activationSentDialogTitleSuccess,
     10 * 1000
   )
+  await ActivationScreen.acceptActivationRequest()
+  await driver.waitForVisible(SalesScreen.mainViewPage)
   t.pass('works correctly')
 })
 
 test('Activation screen', async t => {
   await WelcomeScreen.goThrough()
   await SalesScreen.acceptActivationRequest()
-  await commands.findAndClick(ActivationScreen.submitButton)
-  const alertTitle = await driver
-    .element(ActivationScreen.merchantNameInput)
-    .getText()
-  t.equal(
-    alertTitle,
-    'Please enter a Company name, at least 3 characters ',
-    'Alert title is correct'
+  await ActivationScreen.requestActivation(activation)
+  await driver.waitForVisible(
+    ActivationScreen.activationSentDialogTitleSuccess,
+    10 * 1000
   )
-  await commands.waitForVisible(ActivationScreen.addressInput)
-  t.pass('work correctly')
+  await ActivationScreen.acceptActivationRequest()
+  await driver.waitForVisible(SalesScreen.mainViewPage)
+  t.pass('Sales screen visible')
+  await driver.waitForVisible(SalesScreen.mainViewPage, 5 * 1000)
+  await driver.element(SalesScreen.homeButton).click()
+  await driver.waitForVisible(ActivationScreen.activationSetting, 5 * 1000)
+  t.pass('Activation page visible')
+  await driver.element(ActivationScreen.requestActivationButton).click()
+  await commands.findAndClick(ActivationScreen.requestActivation)
+  await driver.waitForVisible(
+    ActivationScreen.activationSentDialogTitleSuccess,
+    10 * 1000
+  )
 })

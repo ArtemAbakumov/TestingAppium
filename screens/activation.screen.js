@@ -6,6 +6,13 @@ import commands from '../commands'
 const appId = 'se.mobilkassan:id/'
 
 export const ActivationScreen = {
+  activationSetting: idFromText('Activation'),
+  requestActivationButton: idFromResourceId(
+    appId + 'btn_activation_settings_order_new_control_unit'
+  ),
+  updateActivationStatus: idFromResourceId(
+    appId + 'btn_activation_settings_check_activation_status'
+  ),
   corporateIDInput: idFromResourceId(appId + 'EditSeller_organizationNumber'),
   merchantNameInput: idFromResourceId(appId + 'EditSeller_name'),
   addressInput: idFromResourceId(appId + 'et_device_location_address'),

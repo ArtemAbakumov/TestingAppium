@@ -1,6 +1,12 @@
 import helper from 'tipsi-appium-helper'
 
-const { idFromResourceId, idFromText, idFromXPath, driver } = helper
+const {
+  idFromResourceId,
+  idFromText,
+  idFromXPath,
+  driver,
+  idFromAccessId
+} = helper
 import commands from '../commands'
 const appId = 'se.mobilkassan:id/'
 
@@ -18,6 +24,7 @@ export const SalesScreen = {
   incomingChangeDialog: idFromText('New day'),
   acceptIncomingChange: idFromText('OK'),
 
+  mainViewPage: idFromResourceId(appId + 'Main_ViewPager'),
   homeButton: idFromResourceId(appId + 'activity_title'),
   receiptButton: idFromResourceId(appId + 'actionMode_Receipts'),
   productSearchLineInput: idFromResourceId(appId + 'productSearch'),
@@ -33,5 +40,8 @@ export const SalesScreen = {
   ),
   airPaySaleButton: idFromXPath(
     '/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.support.v4.view.ViewPager/android.view.ViewGroup/android.widget.RelativeLayout[5]'
-  )
+  ),
+  //helpMenuButton: idFromAccessId('More options'),не работает
+
+  exportSIEtoast: idFromText('You have no sales yet')
 }
