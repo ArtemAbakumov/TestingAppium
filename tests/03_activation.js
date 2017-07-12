@@ -33,12 +33,12 @@ test('Activation screen: success', async t => {
     ActivationScreen.activationSentDialogTitleSuccess,
     10 * 1000
   )
-  await ActivationScreen.acceptActivationRequest()
+  await commands.findAndClick(SalesScreen.acceptIncomingChange)
   await driver.waitForVisible(SalesScreen.mainViewPage)
-  t.pass('works correctly')
+  t.pass('Activation screen success test complete')
 })
 
-test('Activation screen', async t => {
+test('Activation screen: Request new activation', async t => {
   await WelcomeScreen.goThrough()
   await SalesScreen.acceptActivationRequest()
   await ActivationScreen.requestActivation(activation)
@@ -46,17 +46,39 @@ test('Activation screen', async t => {
     ActivationScreen.activationSentDialogTitleSuccess,
     10 * 1000
   )
-  await ActivationScreen.acceptActivationRequest()
+  await commands.findAndClick(SalesScreen.acceptIncomingChange)
   await driver.waitForVisible(SalesScreen.mainViewPage)
   t.pass('Sales screen visible')
   await driver.waitForVisible(SalesScreen.mainViewPage, 5 * 1000)
-  await driver.element(SalesScreen.homeButton).click()
+  await commands.waitAndClick(SalesScreen.homeButton)
   await driver.waitForVisible(ActivationScreen.activationSetting, 5 * 1000)
   t.pass('Activation page visible')
-  await driver.element(ActivationScreen.requestActivationButton).click()
+  await commands.waitAndClick(ActivationScreen.requestActivationButton)
   await commands.findAndClick(ActivationScreen.requestActivation)
   await driver.waitForVisible(
     ActivationScreen.activationSentDialogTitleSuccess,
     10 * 1000
   )
+  t.pass('Request new activation test complete')
+})
+
+test('Activation screen: Update activation status', async t => {
+  await WelcomeScreen.goThrough()
+  await SalesScreen.acceptActivationRequest()
+  await ActivationScreen.requestActivation(activation)
+  await driver.waitForVisible(
+    ActivationScreen.activationSentDialogTitleSuccess,
+    10 * 1000
+  )
+  await driver.findAndClick(SalesScreen.acceptIncomingChange)
+  await driver.waitForVisible(SalesScreen.mainViewPage, 5 * 1000)
+  t.pass('Sales screen visible')
+  await commands.waitAndClick(SalesScreen.homeButton)
+  await driver.waitForVisible(ActivationScreen.activationSetting, 5 * 1000)
+  t.pass('Activation page visible')
+  await commands.waitAndClick(ActivationScreen.updateActivationStatus)
+  await driver.waitForVisible(ActivationScreen.warmingActivation, 10 * 1000)
+  await commands.waitAndClick(SalesScreen.acceptIncomingChange)
+  await commands.waitForVisible(SalesScreen.mainViewPage)
+  t.pass('Update activation status test complete')
 })

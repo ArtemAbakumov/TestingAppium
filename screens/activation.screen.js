@@ -13,6 +13,7 @@ export const ActivationScreen = {
   updateActivationStatus: idFromResourceId(
     appId + 'btn_activation_settings_check_activation_status'
   ),
+  warmingActivation: idFromText('Waiting for approve'),
   corporateIDInput: idFromResourceId(appId + 'EditSeller_organizationNumber'),
   merchantNameInput: idFromResourceId(appId + 'EditSeller_name'),
   addressInput: idFromResourceId(appId + 'et_device_location_address'),
