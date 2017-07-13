@@ -37,6 +37,7 @@ test('Z-report without activation', async t => {
   await commands.waitAndClick(SalesScreen.acceptIncomingChange)
   t.pass('sales screen opened')
   await commands.waitAndClick(TitleBarScreen.reportButton)
+  //добавить команды поиска кнопки, и условие нажатия на helpButton если кнопка не найдена
   await commands.findAndClick(TitleBarScreen.zReport)
   await driver.waitForVisible(EmailScreen.emailSettingAcceptDialog, 5 * 1000)
   t.pass('Accept dialog visible')

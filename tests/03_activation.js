@@ -82,3 +82,24 @@ test('Activation screen: Update activation status', async t => {
   await commands.waitForVisible(SalesScreen.mainViewPage)
   t.pass('Update activation status test complete')
 })
+/*Выполнить после установки связи с сервером
+test('Activation screen: Prolong activation', async t => {
+  await WelcomeScreen.goThrough()
+  await SalesScreen.acceptActivationRequest()
+  await ActivationScreen.requestActivation(activation)
+  await driver.waitForVisible(
+    ActivationScreen.activationSentDialogTitleSuccess,
+    10 * 1000
+  )
+  await driver.findAndClick(SalesScreen.acceptIncomingChange)
+  await driver.waitForVisible(SalesScreen.mainViewPage, 5 * 1000)
+  t.pass('Sales screen visible')
+  await commands.waitAndClick(SalesScreen.homeButton)
+  await driver.waitForVisible(ActivationScreen.activationSetting, 5 * 1000)
+  t.pass('Activation page visible')
+  await commands.waitAndClick(ActivationScreen.prolongActivationButton)
+  await driver.waitForVisible(ActivationScreen.activationSentDialogTitleSuccess, 10 * 1000)
+  await commands.waitAndClick(SalesScreen.acceptIncomingChange)
+  await commands.waitForVisible(SalesScreen.mainViewPage)
+  t.pass('Update activation status test complete')
+})*/
