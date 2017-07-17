@@ -7,7 +7,7 @@ const appId = 'se.mobilkassan:id/'
 
 export const TaxScreen = {
   TaxClasses: idFromText('Tax classes'),
-  NewItem: idFromResourceId(appId + 'listEntryIcon'),
+  NewItem: idFromText('New tax'),
   VatNameInput: idFromResourceId(appId + 'vatName'),
   VatRateInput: idFromResourceId(appId + 'vatRate'),
   CancelButton: idFromResourceId(appId + 'CrudDialog_buttonCancel'),
