@@ -1,6 +1,7 @@
 import helper from 'tipsi-appium-helper'
 
 const { idFromResourceId, idFromText, idFromXPath, driver } = helper
+
 import commands from '../commands'
 const appId = 'se.mobilkassan:id/'
 

@@ -7,6 +7,7 @@ const {
   driver,
   idFromAccessId
 } = helper
+
 import commands from '../commands'
 const appId = 'se.mobilkassan:id/'
 
@@ -41,7 +42,7 @@ export const SalesScreen = {
   airPaySaleButton: idFromXPath(
     '/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.support.v4.view.ViewPager/android.view.ViewGroup/android.widget.RelativeLayout[5]'
   ),
-  //helpMenuButton: idFromAccessId('More options'),не работает
+  helpMenuButton: idFromAccessId('More options'),
 
   exportSIEtoast: idFromText('You have no sales yet')
 }
