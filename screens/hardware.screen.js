@@ -53,7 +53,6 @@ export const HardwareScreen = {
   btPrinter: idFromText('Serial'),
   addBtprinterDialog: idFromText('Add Bluetooth device'),
   //добавить локаторы через реальное устройство
-
   usbPrinter: idFromText('USB'),
   addUsbPrinterDialog: idFromText('Add USB device'),
 
