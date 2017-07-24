@@ -7,7 +7,7 @@ import commands from '../commands'
 const appId = 'se.mobilkassan:id/'
 
 export const HardwareScreen = {
-  hardwareSettings: idFromText('Hardware settings'),
+  hardwareSettings: idFromText('Payment terminals and printers'), //добавить content-Desc или изменить имя блока настроек
   addHardware: idFromResourceId(appId + 'hardware_add_new'),
   addHardwareDialog: idFromText('Add hardware'),
   terminalRadioButton: idFromText('Payment terminal'),
@@ -42,6 +42,7 @@ export const HardwareScreen = {
   birchPrinter: idFromText('Birch'),
   addNetPrinterDialog: idFromResourceId(appId + 'CrudDialog_mainLayout'),
   nameNetPrinterInput: idFromResourceId(appId + 'printerName'),
+  netPrinteradded: idFromText('Net Printer'),
   addressNetPrinterInput: idFromResourceId(appId + 'printerAddress'),
   widthNetPrinterInput: idFromResourceId(appId + 'printerWidth'),
   defaultPrinterChbox: idFromResourceId(appId + 'isDefault'),
@@ -55,9 +56,16 @@ export const HardwareScreen = {
   //добавить локаторы через реальное устройство
   usbPrinter: idFromText('USB'),
   addUsbPrinterDialog: idFromText('Add USB device'),
+  controlUnitHardware: idFromText('Control unit'),
+  controlUnitSwitcher: idFromResourceId(
+    appId + 'se.mobilkassan:id/cu_type_switch'
+  ),
 
-  setTerminalName: nameTerm => {
-    return commands.setInputValue(HardwareScreen.nameTerminalInput, nameTerm)
+  setTerminalName: nameTerminal => {
+    return commands.setInputValue(
+      HardwareScreen.nameTerminalInput,
+      nameTerminal
+    )
   },
   setTerminalAddress: addressTerm => {
     return commands.setInputValue(HardwareScreen.terminalAddress, addressTerm)
@@ -104,16 +112,37 @@ export const HardwareScreen = {
 
     return driver.click(Buttons.submitButton)
   },
-  addNetPrinter: async printerContent => {
-    if (printerContent.nameNetPrint) {
-      await HardwareScreen.setTerminalName(printerContent.nameNetPrint)
+
+  async addNetPrinterAction(printer = 'Birch') {
+    await commands.findAndClick(HardwareScreen.hardwareSettings)
+    await commands.waitAndClick(HardwareScreen.addHardware, 5 * 1000)
+    await commands.waitAndClick(HardwareScreen.printerRadioButton)
+    await commands.findAndClick(Buttons.nextButton)
+    await commands.waitAndClick(HardwareScreen.netPrinter)
+    await commands.findAndClick(Buttons.nextButton)
+    await commands.waitAndClick(HardwareScreen.birchPrinter)
+    await commands.findAndClick(Buttons.nextButton)
+  },
+
+  // async addNetPrinterAction(printer = 'Custom') {
+  //   await commands.findAndClick(HardwareScreen.hardwareSettings);
+  //   await commands.waitAndClick(HardwareScreen.addHardware, 5 * 1000);
+  //   await commands.waitAndClick(HardwareScreen.printerRadioButton);
+  //   await commands.findAndClick(Buttons.nextButton);
+  //   await commands.waitAndClick(HardwareScreen.netPrinter);
+  //   await commands.findAndClick(Buttons.nextButton);
+  //   await commands.waitAndClick(HardwareScreen.birchPrinter);
+  //   await commands.findAndClick(Buttons.nextButton);
+  // },
+  addNetPrinter: async contentHardware => {
+    if (contentHardware.nameNetPrint) {
+      await HardwareScreen.setNetPrinterName(contentHardware.nameNetPrint)
     }
-    if (printerContent.addressNetPrint) {
-      await HardwareScreen.setTerminalName(printerContent.addressNetPrint)
+
+    if (contentHardware.addressNetPrint) {
+      await HardwareScreen.setAddressNetPrint(contentHardware.addressNetPrint)
     }
-    if (printerContent.addressNetPrint) {
-      await HardwareScreen.setTerminalName(printerContent.addressNetPrint)
-    }
-    return driver.click(Buttons.submitButton)
+
+    return driver.click(Buttons.saveButton)
   }
 }

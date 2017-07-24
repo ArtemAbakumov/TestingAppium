@@ -1,43 +1,42 @@
+import test from 'tape-async'
 import helper from 'tipsi-appium-helper'
-import { findInList } from '../commands'
-
-const { idFromResourceId, idFromText, driver } = helper
+import { WelcomeScreen, SalesScreen, Buttons, TaxScreen } from '../screens'
 import commands from '../commands'
-import {
-  ActivationScreen,
-  SalesScreen,
-  WelcomeScreen,
-  TaxScreen
-} from '../screens'
-const appId = 'se.mobilkassan:id/'
 
-const setTaxDialog = {
-  name: 'VAT11',
-  rate: '11'
-}
+const { driver } = helper
 
 test.onFinish(async () => {
   await driver.closeApp()
 })
 
-test('Create tax', async t => {
+const taxContent = {
+  nameTax: 'VAT11',
+  rateTax: '11'
+}
+
+test('createTax;', async t => {
   await WelcomeScreen.goThrough()
   await SalesScreen.rejectActivationRequest()
-  await driver.findAndClick(SalesScreen.homeButton)
-  await TaxScreen.setTax()
-  await driver.WaitForVisible(TaxScreen.VAT11Item)
+  await driver.waitForVisible(SalesScreen.incomingChangeDialog, 5 * 1000)
+  await driver.element(SalesScreen.acceptIncomingChange).click()
+  await commands.findAndClick(SalesScreen.homeButton)
+  await TaxScreen.addTaxItem()
+  t.pass('Add Tax Dialog opened')
+  await TaxScreen.setTax(taxContent)
+  t.pass('waitSaveButton')
+  await driver.waitForVisible(TaxScreen.vat11Item, 5 * 1000)
   t.pass('Tax VAT11 Created')
 })
 
-test('Activation screen: success', async t => {
-  await WelcomeScreen.goThrough()
-  await SalesScreen.acceptActivationRequest()
-  await ActivationScreen.requestActivation(activation)
-  await driver.waitForVisible(
-    ActivationScreen.activationSentDialogTitleSuccess,
-    10 * 1000
-  )
-  await commands.findAndClick(SalesScreen.acceptIncomingChange)
-  await driver.waitForVisible(SalesScreen.mainViewPage)
-  t.pass('Activation screen success test complete')
-})
+// test("Remiove tax", async t => {
+//   await WelcomeScreen.goThrough();
+//   await SalesScreen.acceptActivationRequest();
+//   await ActivationScreen.requestActivation(activation);
+//   await driver.waitForVisible(
+//     ActivationScreen.activationSentDialogTitleSuccess,
+//     10 * 1000
+//   );
+//   await commands.findAndClick(SalesScreen.acceptIncomingChange);
+//   await driver.waitForVisible(SalesScreen.mainViewPage);
+//   t.pass("Activation screen success test complete");
+// });

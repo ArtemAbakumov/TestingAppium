@@ -19,7 +19,7 @@ export const ReceiptSettings = {
   showCompLogoChbox: idFromResourceId(appId + 'showLogo_cbox'),
   printReceiptChbox: idFromResourceId(appId + 'activate_print'),
   emailReceiptChbox: idFromResourceId(appId + 'activate_email'),
-  silentEmailReceiptChbox: idFromResourceId(appid + 'activate_silent_email'),
+  silentEmailReceiptChbox: idFromResourceId(appId + 'activate_silent_email'),
   sizeLogo: idFromResourceId(appId + 'logoSize_sbar'),
   chooseLogo: idFromResourceId(appId + 'EditReceiptSettings_iconButton')
 }

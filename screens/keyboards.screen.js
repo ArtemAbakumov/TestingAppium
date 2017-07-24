@@ -11,7 +11,7 @@ export const KeyboardsScreen = {
 
   newScreen: idFromText('New screen'),
   nameScreen: idFromResourceId(appId + 'EditKeyboard_name'),
-  classicViewSwitch: idFromResourceId(appID + 'classicLayoutSwitch'),
+  classicViewSwitch: idFromResourceId(appId + 'classicLayoutSwitch'),
   landscapeLayoutSwitch: idFromResourceId(appId + 'landscapeLayoutSwitch'),
   resizeScreen: idFromAccessId('Resizing'),
   actionScreen: idFromAccessId('Screen actions'),
@@ -34,7 +34,7 @@ export const KeyboardsScreen = {
   addNumeric00: idFromResourceId(appId + '/addNumeric00'),
   addNumericDot: idFromResourceId(appId + 'addNumericDot'),
   addAmountButton: idFromResourceId(appId + 'addNumericDollar'),
-  addQuantity: idFromResourceId(appId + 'addNumericHash'),
+  addQuantity: idFromResourceId(appId + 'addNumappIdericHash'),
   addClearingButton: idFromResourceId(appId + 'addNumericC'),
   addUndoingdigitButton: idFromResourceId(appId + 'addNumericBackspace'),
   paymentsButtonsList: idFromText('Payment buttons'),
@@ -54,7 +54,7 @@ export const KeyboardsScreen = {
   verticalGroupsArticleList: idFromResourceId(
     appId + 'addGroupsProductsViewHorizontal'
   ),
-  verticalTextViewArtcle: idFromResourceId(appID + 'addGroupsProductsViewText'),
+  verticalTextViewArtcle: idFromResourceId(appId + 'addGroupsProductsViewText'),
   horizontalGroupsArticleList: idFromResourceId(
     appId + 'addGroupsProductsViewVertical'
   ),

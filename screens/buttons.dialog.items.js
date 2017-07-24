@@ -11,6 +11,7 @@ export const Buttons = {
   submitButton: idFromText('Ok'),
   cancelButton: idFromText('Cancel'),
   nextButton: idFromText('Next'),
+  saveButton: idFromText('Save'),
   previousButton: idFromText('Previous'),
   regectSaveItems() {
     return driver.click(idFromText('Cancel'))
