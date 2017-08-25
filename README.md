@@ -55,6 +55,7 @@
 - ```pressTabBtton()``` - отправляет команду "tab"
 - ```scrollDown()``` - скролит вниз
 - ```scrollUp()``` - скролит вверх
+- ```touchAction(selector, 'longPress')``` - долгий тап на элементе
 
 ### Тест
 ```js

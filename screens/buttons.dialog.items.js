@@ -7,7 +7,7 @@ import commands from '../commands'
 const appId = 'se.mobilkassan:id/'
 
 export const Buttons = {
-  removeArticlegroup: idFromText('Remove'),
+  removeItems: idFromText('Remove'),
   submitButton: idFromText('Ok'),
   cancelButton: idFromText('Cancel'),
   nextButton: idFromText('Next'),

@@ -15,3 +15,13 @@ export const ArtcleGroupScreen = {
   ),
   nameArticleGroupInput: idFromResourceId(appId + 'categoryName')
 }
+
+//setArticleName: nameArticleGroup => {
+//  return commands.setInputValue(ArtcleGroupScreen.nameArticleGroupInput, nameArticleGroup)
+// }
+//async addArticleGroupIcon() {
+// articleGroupIcon => {
+//await driver.findAndClick(ArticleGroupScreen.editArticleGroupIconButton)
+//
+// },/*
+//}
