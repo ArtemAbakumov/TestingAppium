@@ -14,6 +14,11 @@ export const TaxScreen = {
   vatNameInput: idFromResourceId(appId + 'vatName'),
   vatRateInput: idFromResourceId(appId + 'vatRate'),
   vat11Item: idFromText('VAT11'),
+  vat23Item: idFromText('VAT23'),
+
+  openTax: taxopened => {
+    return driver.findAndClick(TaxScreen.vat11Item)
+  },
 
   setTaxName: nameTax => {
     return commands.setInputValue(TaxScreen.vatNameInput, nameTax)
@@ -29,11 +34,13 @@ export const TaxScreen = {
   },
   setTax: async taxContent => {
     if (taxContent.nameTax) {
+      await driver.clearElement(TaxScreen.vatNameInput)
       await TaxScreen.setTaxName(taxContent.nameTax)
     }
     if (taxContent.rateTax) {
+      await driver.clearElement(TaxScreen.vatRateInput)
       await TaxScreen.setTaxRate(taxContent.rateTax)
     }
-    return commands.findAndClick(Buttons.saveButton)
+    return Buttons.acceptSaveItems()
   }
 }

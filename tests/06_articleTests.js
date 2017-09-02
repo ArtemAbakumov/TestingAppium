@@ -5,7 +5,7 @@ import {
   SalesScreen,
   Buttons,
   SettingsScreen,
-  ArticleGroupScreen
+  ArticleScreen
 } from '../screens'
 import commands from '../commands'
 
@@ -15,15 +15,22 @@ test.onFinish(async () => {
   await driver.closeApp()
 })
 
-const articleGroupContent = {
-  nameArticleGroup: 'NewArticleGroup'
+const articleContent = {
+  nameArticle: 'NewArticleGroup',
+  nettoPrice: '100',
+  grossPrice: '125',
+  barcode: '123456'
 }
-const changeArticleGroupContent = {
-  nameArticleGroupChange: 'ChangedArticleGroup'
+
+const changeArticleContent = {
+  nameArticle: 'NewArticleGroupChange',
+  nettoPrice: '200',
+  grossPrice: '250',
+  barcode: '111111'
 }
-test('create & remove ArticleGroup', async t => {
+test('create & remove Article', async t => {
   await SettingsScreen.openSettings()
-  await ArticleGroupScreen.addArticleGrItem()
+  await ArticleScreen.createArticle(articleGroupContent)
   t.pass('Add Article Group Dialog opened')
   await ArticleGroupScreen.setArticleGroup(articleGroupContent)
   await driver.waitForVisible(ArticleGroupScreen.articleGroup1, 5 * 1000)
@@ -34,7 +41,7 @@ test('create & remove ArticleGroup', async t => {
   t.pass('Article group remoted')
 })
 
-test('Change Article Group', async t => {
+test('Change Article', async t => {
   await SettingsScreen.openSettings()
   await ArticleGroupScreen.addArticleGrItem()
   t.pass('Add Article Group Dialog opened')

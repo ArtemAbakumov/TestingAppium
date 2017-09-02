@@ -56,6 +56,7 @@
 - ```scrollDown()``` - скролит вниз
 - ```scrollUp()``` - скролит вверх
 - ```touchAction(selector, 'longPress')``` - долгий тап на элементе
+- ```clearElement()``` - очищает поле ввода 
 
 ### Тест
 ```js
