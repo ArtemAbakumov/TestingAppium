@@ -11,7 +11,7 @@ export const ArticleGroupScreen = {
   artileGroupSetting: idFromText('Article groups'),
   newArticleGroup: idFromText('New article group'),
   addArGrDialog: idFromResourceId(appId + 'scrollView'),
-  articleGroup1: idFromText('Article group 1'),
+  articleGroup1: idFromText('Article group1'),
   changedArticleGroup: idFromText('ChangedArticleGroup'),
   editArticleGroupIconButton: idFromResourceId(
     appId + 'EditCategory_iconButton'
@@ -21,7 +21,7 @@ export const ArticleGroupScreen = {
   openArticleGroup: openArGr => {
     return driver.findAndClick(ArticleGroupScreen.articleGroup1)
   },
-  setArticleGroup: nameArticleGroup => {
+  setArticleGroupName: nameArticleGroup => {
     return commands.setInputValue(
       ArticleGroupScreen.nameArticleGroupInput,
       nameArticleGroup
@@ -36,9 +36,9 @@ export const ArticleGroupScreen = {
     ), await driver.waitForVisible(ArticleGroupScreen.addArGrDialog)
   },
 
-  setArticleGroup: async nameArticleGroup => {
+  setArticleGroup: async articleGroupContent => {
     if (articleGroupContent.nameArticleGroup) {
-      await driver.clearElement(articleGroupContent.nameArticleGroup)
+      await driver.clearElement(ArticleGroupScreen.nameArticleGroupInput)
       await ArticleGroupScreen.setArticleGroupName(
         articleGroupContent.nameArticleGroup
       )

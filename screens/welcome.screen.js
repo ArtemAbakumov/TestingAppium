@@ -5,6 +5,7 @@ import { SalesScreen } from './sales.screen'
 const { idFromAccessId, idFromText, idFromResourceId, driver } = helper
 
 export const WelcomeScreen = {
+  newSeller: idFromText('New Seller'),
   setupWizardTitle: idFromText('Setup wizard'),
   continueButton: idFromText('Continue'),
   setOrientationTitle: idFromText('Set up orientation'),

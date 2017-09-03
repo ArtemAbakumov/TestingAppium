@@ -27,7 +27,7 @@ test('create & remove ArticleGroup', async t => {
   t.pass('Add Article Group Dialog opened')
   await ArticleGroupScreen.setArticleGroup(articleGroupContent)
   await driver.waitForVisible(ArticleGroupScreen.articleGroup1, 5 * 1000)
-  t.pass('Tax ArticleGroup 1 is Created')
+  t.pass('Tax NewArticleGroup is Created')
   await driver.touchAction(ArticleGroupScreen.articleGroup1, 'longPress')
   await commands.waitAndClick(Buttons.removeItems)
   await commands.waitForNotExist(ArticleGroupScreen.articleGroup1)

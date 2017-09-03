@@ -8,8 +8,7 @@ const appId = 'se.mobilkassan:id/'
 
 export const ArticleScreen = {
   articleSettings: idFromText('Articles'),
-  newArticle: idFromText('New article'),
-
+  addArticle: idFromText('New article'),
   articleGroup1: idFromText('Article group 1'),
   listViewSwitch: idFromResourceId(appId + 'Switch_To_Listview'),
   articleName: idFromResourceId(appId + 'productName'),
@@ -21,34 +20,38 @@ export const ArticleScreen = {
   pieceArticleRadioButton: idFromResourceId(appId + 'EditProduct_countByUnit'),
   priceArticleRadioButton: idFromResourceId(appId + 'EditProduct_countByPrice'),
   barcodeArticle: idFromResourceId(appId + 'productBarcode'),
+  newArticle: idFromText('New Article'),
 
+  openArticle: openArtcl => {
+    return driver.findAndClick(ArticleScreen.newArticle)
+  },
   setArticleName: nameArticle => {
     return commands.setInputValue(ArticleScreen.articleName, nameArticle)
   },
-  setNettoArtcle: nettoSum => {
-    return commands.setInputValue(ArticleScreen.nettoArticle, nettoSum)
+  setNettoArtcle: nettoPrice => {
+    return commands.setInputValue(ArticleScreen.nettoArticle, nettoPrice)
   },
-  setBarArtcle: barArticle => {
-    return commands.setInputValue(ArticleScreen.barcodeArticle, barArticle)
+  setBarArtcle: barcode => {
+    return commands.setInputValue(ArticleScreen.barcodeArticle, barcode)
   },
 
   async createArticle() {
     await driver.click(ArticleScreen.articleSettings)
     await commands.waitAndClick(ArticleScreen.articleGroup1)
-    return commands.waitAndClick(ArticleScreen.newArticle)
+    return commands.waitAndClick(ArticleScreen.addArticle)
   },
-  setArticle: async addArticle => {
+  setArticle: async articleContent => {
     if (articleContent.nameArticle) {
       await driver.clearElement(ArticleScreen.articleName)
       await ArticleScreen.setArticleName(articleContent.nameArticle)
     }
     if (articleContent.nettoPrice) {
       await driver.clearElement(ArticleScreen.nettoArticle)
-      await ArticleScreen.setNettoArtcle(articleContent.nameArticle)
+      await ArticleScreen.setNettoArtcle(articleContent.nettoPrice)
     }
     if (articleContent.barcode) {
       await driver.clearElement(ArticleScreen.barcodeArticle)
-      await ArticleScreen.setBarArtcle(articleContent.barcodeArticle)
+      await ArticleScreen.setBarArtcle(articleContent.barcode)
     }
   }
 }

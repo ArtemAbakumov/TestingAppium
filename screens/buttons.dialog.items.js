@@ -7,6 +7,7 @@ import commands from '../commands'
 const appId = 'se.mobilkassan:id/'
 
 export const Buttons = {
+  homeButton: idFromResourceId(appId + 'activity_title'),
   removeItems: idFromText('Remove'),
   submitButton: idFromText('Ok'),
   cancelButton: idFromText('Cancel'),
@@ -22,5 +23,8 @@ export const Buttons = {
   selectColorIcon: idFromResourceId(appId + 'Icon_SelectColor'),
   takePhotoIcon: idFromResourceId(appId + 'Icon_TakePhoto'),
   getPhoto: idFromResourceId('com.android.camera:id/shutter_button'),
-  selectPictureIcon: idFromResourceId(appId + 'Icon_SelectPicture')
+  selectPictureIcon: idFromResourceId(appId + 'Icon_SelectPicture'),
+  enterPinDialog: idFromResourceId('android:id/content'),
+  enterPinInput: idFromResourceId(appId + 'pin_edit_text'),
+  headPinDialog: idFromText('Enter PIN:')
 }
