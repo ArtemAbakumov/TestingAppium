@@ -1,0 +1,6 @@
+# Usage: docker-compose build
+version: '2'
+
+services:
+  appium:
+   build: .
