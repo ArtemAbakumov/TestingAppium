@@ -56,7 +56,7 @@
 - ```scrollDown()``` - скролит вниз
 - ```scrollUp()``` - скролит вверх
 - ```touchAction(selector, 'longPress')``` - долгий тап на элементе
-- ```clearElement()``` - очищает поле ввода 
+- ```clearElement()``` - очищает поле ввода
 
 ### Тест
 ```js
@@ -79,6 +79,21 @@ test('Activation screen', async t => {
 ### Запуст тестов
 - Перед запустом тестов нужно запустить эмулятор android и сервер appium.
 - Сервер appium можно запустить коммандой в папке с проектом ```npm run appium```
-- После старта сервера в соседнем терминале можно запустить все тесты коммандой ```npm run test```
+- После старта сервера в соседнем терминале можно запустить все тесты командой ```npm run test```
 - Либо запустить конкретный тест ```node_modules/.bin/appium-helper --platform android --glob ./tests/02_activation.js```
 - добавить переменные в playground '''.editor'''
+
+### Docker
+ - создание Image с appium и node ```docker-compose build```
+
+### тесты на эмуляторе
+ - запуск контейнера для тестирования genymotion устройства ```docker run --privileged -d -v /путь к/TestingAppium-master:/opt -e REMOTE_ADB=True -e ANDROID_DEVICES=ip адрес genymotion устройства:5555 --name container-appium testingappiummaster_appium```
+ - вход в контейнер ```docker exec -it container-appium bash```
+ - подключение устройства ```adb connect ip адрес genymotion:5555 && adb devices```
+ - запуск тестов ```cd /opt && npm run test```
+
+### тесты на реальном устройстве
+ - запуск контейнера для тестирования genymotion устройства ```docker run --privileged -d -v /путь к/TestingAppium-master:/opt -v /dev/bus/usb:/dev/bus/usb --name container-appium testingappiummaster_appium```
+ - вход в контейнер ```docker exec -it container-appium bash```
+ - подключение устройства ```adb devices```
+ - запуск тестов ```cd /opt && npm run test```
